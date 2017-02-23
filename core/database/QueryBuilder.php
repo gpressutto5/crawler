@@ -47,4 +47,12 @@ class QueryBuilder
         $statement->execute();
         return $statement->fetch()['count'];
     }
+
+    public function selected($id)
+    {
+        $query = "INSERT INTO selected (wc_id) VALUES (:id)";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 }

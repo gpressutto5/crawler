@@ -25,5 +25,8 @@ function contains($str, array $arr)
 
 function check($url, array $arr)
 {
+	if (stripos($url, ".br") !== false) {
+		return true;
+	}
 	return contains(getContent($url), $arr);
 }

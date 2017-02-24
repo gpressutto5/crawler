@@ -28,7 +28,7 @@ class QueryBuilder
         foreach ($columns as &$value) {
             $value = "`{$value}`";
         }
-        $query = "SELECT ".implode(",", $columns)." FROM {$table}";
+        $query = "SELECT ".implode(",", $columns)." FROM {$table} WHERE crawler = 0";
         if ($limit) {
             $query .= " LIMIT :offset,:limit";
         }
@@ -51,6 +51,14 @@ class QueryBuilder
     public function selected($id)
     {
         $query = "INSERT INTO selected (wc_id) VALUES (:id)";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public function crawled($id)
+    {
+        $query = "UPDATE woocommerce_list SET crawler = 1 WHERE id = :id";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();

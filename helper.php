@@ -13,6 +13,15 @@ function getContent($url) {
 	return $response;
 }
 
+function checkCart($url) {
+	$headers = get_headers($url."/cart");
+	$status = substr($headers[0], 9, 3);
+	if ($status === "200") {
+		return true;
+	}
+	return false;
+}
+
 function contains($str, array $arr)
 {
     foreach($arr as &$a) {
@@ -25,8 +34,11 @@ function contains($str, array $arr)
 
 function check($url, array $arr)
 {
-	if (stripos($url, ".br") !== false) {
-		return true;
+	if (checkCart($url)) {
+		if (stripos($url, ".com.br") !== false) {
+			return true;
+		}
+		return contains(getContent($url), $arr);
 	}
-	return contains(getContent($url), $arr);
+	return false;
 }

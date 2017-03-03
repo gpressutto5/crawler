@@ -30,13 +30,9 @@ class QueryBuilder
         }
         $query = "SELECT ".implode(",", $columns)." FROM {$table} WHERE crawler = 0";
         if ($limit) {
-            $query .= " LIMIT :offset,:limit";
+            $query .= " LIMIT $offset,$limit";
         }
         $statement = $this->pdo->prepare($query);
-        if ($limit) {
-            $statement->bindParam(":limit", $limit, PDO::PARAM_INT);
-            $statement->bindParam(":offset", $offset, PDO::PARAM_INT);
-        }
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }

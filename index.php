@@ -4,7 +4,7 @@ require 'core/bootstrap.php';
 const NUMBER_OF_INSTANCES_TO_RUN = 10;
 
 if (count($argv) == 1) {
-    $count = countAll('woocommerce_list');
+    $count = $app['database']->countAll('woocommerce_list');
     $limit = $count / NUMBER_OF_INSTANCES_TO_RUN;
 
     for ($i=0; $i < NUMBER_OF_INSTANCES_TO_RUN; $i++) {

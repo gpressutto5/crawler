@@ -5,7 +5,7 @@ const NUMBER_OF_INSTANCES_TO_RUN = 10;
 
 if (count($argv) == 1) {
     $count = $app['database']->countAll('woocommerce_list');
-    $limit = $count / NUMBER_OF_INSTANCES_TO_RUN;
+    $limit = ceil($count / NUMBER_OF_INSTANCES_TO_RUN);
 
     for ($i=0; $i < NUMBER_OF_INSTANCES_TO_RUN; $i++) {
         echo "Iniciando serviço ". ($i+1) ." de ".NUMBER_OF_INSTANCES_TO_RUN;

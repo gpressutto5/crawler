@@ -4,13 +4,13 @@ require 'core/bootstrap.php';
 const NUMBER_OF_INSTANCES_TO_RUN = 10;
 
 if (count($argv) == 1) {
-    $count = count($sites);
+    $count = countAll('woocommerce_list');
     $limit = $count / NUMBER_OF_INSTANCES_TO_RUN;
 
     for ($i=0; $i < NUMBER_OF_INSTANCES_TO_RUN; $i++) {
         echo "Iniciando serviço ". ($i+1) ." de ".NUMBER_OF_INSTANCES_TO_RUN;
         $offset = $limit * $i;
-        system("nohup php ~/Code/crawler/index.php $limit $offset > ~/Code/crawler/out". ($i+1) .".txt");
+        system("nohup php ~/Code/crawler/index.php $limit $offset > ~/Code/crawler/out". ($i+1) .".txt &");
         echo "\t\t\tINICIADO\n";
     }
     echo NUMBER_OF_INSTANCES_TO_RUN . " serviços iniciados com sucesso!\n";

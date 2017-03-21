@@ -54,7 +54,7 @@ class QueryBuilder
 
     public function crawled($id)
     {
-        $query = "UPDATE woocommerce_list SET crawler = 1 WHERE id = :id";
+        $query = "UPDATE website_list SET crawler = 1 WHERE id = :id";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
